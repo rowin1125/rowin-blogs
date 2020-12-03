@@ -4,6 +4,12 @@
   "main": "index.js",
   "author": "Rowin",
   "license": "MIT",
+  "scripts": {
+    "serve": "node index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "push:deploy": "git push && git push heroku HEAD:master"
+  },
   "dependencies": {
     "apollo-server": "^2.19.0",
     "bcryptjs": "^2.4.3",
