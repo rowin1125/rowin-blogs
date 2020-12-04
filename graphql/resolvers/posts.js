@@ -1,6 +1,8 @@
+const { AuthenticationError, UserInputError } = require("apollo-server");
+
+const { validatePostInput } = require("../../utils/validators");
 const Post = require("../../models/Post");
 const checkAuth = require("../../utils/check-auth");
-const { AuthenticationError, UserInputError } = require("apollo-server");
 
 module.exports = {
   Query: {
@@ -28,10 +30,8 @@ module.exports = {
       const user = checkAuth(ctx);
 
       // Check if values are filled in
-      const titleIsEmpty = title.trim() === "";
-      const bodyIsEmpty = body.trim() === "";
-      if (titleIsEmpty) throw new Error("Post title must not be empty");
-      if (bodyIsEmpty) throw new Error("Post body must not be empty");
+      const { valid, errors } = validatePostInput(title, body);
+      if (!valid) throw new UserInputError("Errors", { errors });
 
       // Create Post from model
       const newPost = new Post({
