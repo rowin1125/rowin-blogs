@@ -25,17 +25,18 @@ module.exports = {
     },
   },
   Mutation: {
-    async createPost(_, { title, body }, ctx) {
+    async createPost(_, { title, description, body }, ctx) {
       // Check authentication
       const user = checkAuth(ctx);
 
       // Check if values are filled in
-      const { valid, errors } = validatePostInput(title, body);
+      const { valid, errors } = validatePostInput(title, description, body);
       if (!valid) throw new UserInputError("Errors", { errors });
 
       // Create Post from model
       const newPost = new Post({
         title,
+        description,
         body,
         user: user.id,
         username: user.username,

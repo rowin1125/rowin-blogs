@@ -62,7 +62,6 @@ module.exports = {
         confirmPassword
       );
       if (!valid) {
-        console.log("errors", errors);
         throw new UserInputError("Errors", { errors });
       }
 

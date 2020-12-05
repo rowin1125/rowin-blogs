@@ -5,6 +5,7 @@ module.exports = gql`
   type Post {
     id: ID!
     title: String!
+    description: String!
     body: String!
     createdAt: String!
     username: String!
@@ -48,7 +49,7 @@ module.exports = gql`
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
 
-    createPost(title: String!, body: String!): Post!
+    createPost(title: String!, description: String!, body: String!): Post!
     deletePost(postId: ID!): String!
     likePost(postId: ID!): Post!
 
